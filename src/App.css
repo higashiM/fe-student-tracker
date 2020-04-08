@@ -1,38 +1,93 @@
-.App {
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.statsGrid > span {
+  padding: 8px 4px;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.blockGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.blockGrid > span {
+  padding: 8px 4px;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.main-header {
+  grid-area: header;
+  color: white;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.main-section {
+  grid-area: content;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.main-nav {
+  grid-area: nav;
+  color: red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.app {
+  max-width: 1024px;
+  margin: 0 auto;
+  font: 1.2em Helvetica, arial, sans-serif;
+}
+
+.app > * {
+  border: 2px solid grey;
+  background-color: black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.app {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-areas:
+    "header header"
+    "nav content"
+    "nav content";
+}
+
+@media (min-width: 500px) {
+  .app {
+    grid-template-columns: 1fr 3fr;
+    grid-template-areas:
+      "header  header"
+      "nav     content"
+      "nav content";
   }
-  to {
-    transform: rotate(360deg);
+
+  nav ul {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+@media (min-width: 700px) {
+  .app {
+    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-areas:
+      "header header  header"
+      "nav    content content"
+      "nav    content content";
+  }
+  nav ul {
+    flex-direction: column;
   }
 }
