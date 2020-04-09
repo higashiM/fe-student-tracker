@@ -1,14 +1,18 @@
-.statsGrid {
+.studentGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border-top: 1px solid black;
   border-right: 1px solid black;
 }
 
-.statsGrid > span {
+.studentGrid > span {
   padding: 8px 4px;
   border-left: 1px solid black;
   border-bottom: 1px solid black;
+}
+
+.studentList__Header {
+  font-weight: bold;
 }
 
 .blockGrid {
@@ -28,14 +32,17 @@
   grid-area: header;
   color: white;
   text-align: center;
+  background-color: #3b3a30;
 }
 .main-section {
   grid-area: content;
   color: white;
+  background-color: #b2c2bf;
 }
 .main-nav {
   grid-area: nav;
-  color: red;
+  color: #3b3a30;
+  background-color: #eaece5;
 }
 
 .app {
@@ -46,7 +53,6 @@
 
 .app > * {
   border: 2px solid grey;
-  background-color: black;
   border-radius: 5px;
   padding: 10px;
 }
@@ -58,7 +64,7 @@ nav ul {
 }
 .app {
   display: grid;
-  grid-gap: 20px;
+  gap: 5px;
   grid-template-areas:
     "header header"
     "nav content"

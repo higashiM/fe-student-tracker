@@ -3,41 +3,42 @@ import * as api from "../utils/api";
 import { Link } from "@reach/router";
 
 export default class DetailedInfo extends Component {
-  state = { students: [] };
-  componentDidUpdate() {
-    this.loadPage();
+  state = { students: [], isloading: true };
+  componentDidUpdate(prevProps) {
+    if (prevProps.block !== this.props.block) {
+      this.loadPage();
+    }
   }
   componentDidMount() {
     this.loadPage();
   }
   loadPage = () => {
-    if (this.props.block !== this.state.block) {
-      const params = { graduated: false };
-      if (this.props.block !== "all") params.block = this.props.block;
+    const params = { graduated: false };
+    if (this.props.block !== "all") params.block = this.props.block;
 
-      api.getstudents(params).then((data) => {
-        console.log(data.students);
-
-        this.setState({ students: data.students, block: this.props.block });
+    api.getstudents(params).then((data) => {
+      this.setState({
+        students: data.students,
+        block: this.props.block,
+        isloading: false,
       });
-    }
+    });
   };
   render() {
-    //return <h1>{this.props.cohort}</h1>;
-    //import { Link } from "@reach/router";
-    const { students } = this.state;
+    const { students, isloading } = this.state;
 
-    return (
-      <div className="statsGrid">
-        <span className="studentList__Header">Student</span>
+    return isloading ? (
+      <div>loading</div>
+    ) : (
+      <div className="studentGrid">
         <span className="studentList__Header">Name</span>
         <span className="studentList__Header">Start Cohort</span>
         <span className="studentList__Header">Curr Block</span>
+        <span className="studentList__Header">Student ID </span>
 
         {students.map((student, index) => {
           return (
             <>
-              <span className="studentList__student">{index + 1}</span>
               <span className="studentList__student">
                 {" "}
                 <Link to={`/singlestudent/${student._id}`}>{student.name}</Link>
@@ -47,6 +48,9 @@ export default class DetailedInfo extends Component {
               </span>
               <span className="studentList__student">
                 {student.currentBlock}
+              </span>
+              <span className="studentList__student">
+                <Link to={`/singlestudent/${student._id}`}> {student._id}</Link>
               </span>
             </>
           );

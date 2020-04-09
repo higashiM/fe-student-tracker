@@ -18,7 +18,7 @@ export default class HallofFame extends Component {
     const { students } = this.state;
 
     return (
-      <div className="statsGrid">
+      <div className="studentGrid">
         <span className="studentList__Header">Name</span>
         <span className="studentList__Header">Start Cohort</span>
         <span className="studentList__Header">Curr Block</span>
